@@ -1,0 +1,37 @@
+<div *ngIf="show">
+    <h2 class="title_center">Inicio de sesi&oacute;n</h2>
+    <form #forma="ngForm" (ngSubmit)="save()" autocomplete="off" id="form">
+        <div *ngIf="error" class="alert alert-warning" role="alert">
+            Las credenciales no son las correctas
+        </div>
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" #email="ngModel" name="email" class="form-control" id="email" aria-describedby="emailHelp" [(ngModel)]="user.email" required pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                [ngClass]="{'is-valid':email.valid,'is-invalid':email.invalid}">
+            <small id="emailHelp" class="form-text text-muted">Este email es confidencial</small>
+            <div *ngIf="email.invalid&&(email.dirty||email.touched)" class="alert alert-danger">
+                <div *ngIf="email.errors.required">
+                    El email es necesario
+                </div>
+                <div *ngIf="email.errors&&email.errors.pattern">
+                    Email no cumple con las características oficiales
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" #password="ngModel" class="form-control" id="password" [(ngModel)]="user.password" required minlength="6" [ngClass]="{'is-valid':password.valid,'is-invalid':password.invalid}">
+            <div *ngIf="password.invalid&&(password.dirty || password.touched)" class="alert alert-danger mt-2">
+                <div *ngIf="password.errors.required">
+                    La contraseña es necesaria
+                </div>
+                <div *ngIf="password.errors&&password.errors.minlength">
+                    Mínimo tiene que ser de {{password.errors.minlength.requiredLength}} carácteres
+                </div>
+            </div>
+        </div>
+
+        <button [disabled]="!forma.valid" type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+
+</div>

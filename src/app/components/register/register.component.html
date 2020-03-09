@@ -1,0 +1,48 @@
+<form #forma="ngForm" (ngSubmit)="register(forma)" autocomplete="off" id="form">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Name:</label>
+        <input type="text" class="form-control" id="name" #name="ngModel" name="name" [(ngModel)]="user.name" required [ngClass]="{'is-valid':name.valid,'is-invalid':name.invalid}">
+        <div class="alert alert-danger mt-2" role="alert" *ngIf="name.invalid&&(name.dirty||name.touched)">
+            <div *ngIf="name.errors.required">
+                El nombre es requerido
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Last Name:</label>
+        <input type="text" class="form-control" id="lastname" #lastname="ngModel" name="lastname" [(ngModel)]="user.lastname" required [ngClass]="{'is-valid':lastname.valid,'is-invalid':lastname.invalid}">
+        <div class="alert alert-danger mt-2" role="alert" *ngIf="lastname.invalid&&(lastname.dirty||lastname.touched)">
+            <div *ngIf="lastname.errors.required">
+                El apellido es requerido
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" #email="ngModel" name="email" [(ngModel)]="user.email" required [ngClass]="{'is-valid':email.valid,'is-invalid':email.invalid}" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$">
+        <small id="emailHelp" class="form-text text-muted">Es información confidencial.</small>
+        <div class="alert alert-danger mt-2" role="alert" *ngIf="email.invalid&&(email.dirty||email.touched)">
+            <div *ngIf="email.errors.required">
+                El correo es necesario
+            </div>
+            <div *ngIf="email.errors.pattern">
+                No son caráteres válidos
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" #password="ngModel" name="password" [(ngModel)]="user.password" required minlength="6" [ngClass]="{'is-valid':password.valid,'is-invalid':password.invalid}">
+        <div class="alert alert-danger mt-2" role="alert" *ngIf="password.invalid&&(password.dirty||password.touched)">
+            <div *ngIf="password.errors.required">
+                La contraseña es necesaria
+            </div>
+            <div *ngIf="password.errors.minlength">
+                Mínimo {{password.errors.minlength.requiredLength}} carácteres
+            </div>
+        </div>
+    </div>
+
+    <button [disabled]="forma.invalid" type="submit" class="btn btn-primary">Register</button>
+</form>

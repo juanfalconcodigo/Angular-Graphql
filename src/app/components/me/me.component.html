@@ -1,0 +1,12 @@
+<ngx-spinner></ngx-spinner>
+<div class="row" *ngIf="user">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{user.name}} - {{user.lastname}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
+            <p class="card-text">{{user.registerDate}}</p>
+
+            <button (click)="logout()" class="btn btn-outline-info">Salir</button>
+        </div>
+    </div>
+</div>
